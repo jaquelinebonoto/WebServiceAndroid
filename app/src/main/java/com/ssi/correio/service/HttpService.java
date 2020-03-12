@@ -2,6 +2,7 @@ package com.ssi.correio.service;
 
 import android.os.AsyncTask;
 
+import com.google.gson.Gson;
 import com.ssi.correio.model.CEP;
 
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Scanner;
 
 
 //parametros de AsyncTask:
@@ -25,6 +27,9 @@ public class HttpService extends AsyncTask<Void, Void, CEP> {
     }
     @Override
     protected CEP doInBackground(Void... voids) {
+        //stringbuilder para receber o json
+        StringBuilder resposta = new StringBuilder();
+
         if (this.cep != null && this.cep.length() == 8) {
             try{
                 //url da api
@@ -38,6 +43,12 @@ public class HttpService extends AsyncTask<Void, Void, CEP> {
                 connection.setConnectTimeout(5000);
                 //a conexão de fato
                 connection.connect();
+
+                //recebendo o retorno
+                Scanner scanner = new Scanner(url.openStream());
+                while (scanner.hasNext()) {
+                    resposta.append(scanner.next());
+                }
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (ProtocolException e) {
@@ -47,6 +58,7 @@ public class HttpService extends AsyncTask<Void, Void, CEP> {
             }
 
         }
-        return null;
+        //transformando e json string em cep
+        return new Gson().fromJson(resposta.toString(), CEP.class);
     }
 }
