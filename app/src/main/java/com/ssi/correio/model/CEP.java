@@ -6,8 +6,8 @@ public class CEP {
     private String logradouro;
     private String complemento;
     private String bairro;
-    private String cidade;
-    private String estado;
+    private String localidade;
+    private String uf;
 
     public String getCep() {
         return cep;
@@ -41,20 +41,20 @@ public class CEP {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getLocalidade() {
+        return localidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setLocalidade(String Localidade) {
+        this.localidade = localidade;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getUf() {
+        return uf;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     @Override
@@ -63,8 +63,8 @@ public class CEP {
                 + "\nLogradouro: " + getLogradouro()
                 + "\nComplemento: " + getComplemento()
                 + "\nBairro: " + getBairro()
-                + "\nCidade:" + getCidade()
-                + "\nEstado: " + getEstado();
+                + "\nCidade:" + getLocalidade()
+                + "\nEstado: " + getUf();
     }
 
 }
