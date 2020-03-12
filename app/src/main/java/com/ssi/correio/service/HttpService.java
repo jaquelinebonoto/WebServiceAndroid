@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 
 import com.ssi.correio.model.CEP;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 
 //parametros de AsyncTask:
 //1. enviado para a execução da classe
@@ -20,7 +23,12 @@ public class HttpService extends AsyncTask<Void, Void, CEP> {
     @Override
     protected CEP doInBackground(Void... voids) {
         if (this.cep != null && this.cep.length() == 8) {
-            // realizar busca
+            try{
+                URL url = new URL("http://viacep.com.br/ws/" + this.cep + "/json/");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
         }
         return null;
     }
